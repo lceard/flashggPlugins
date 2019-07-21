@@ -102,6 +102,10 @@ flashggAnaTreeMakerWithSyst::Analyze( const edm::Event &iEvent, const edm::Event
 
     // Global information
     // ---------------------------------------------------------------------------------------------------------
+    dataformat.run = iEvent.id().run();
+    dataformat.event = iEvent.id().event();
+    dataformat.lumisection = iEvent.luminosityBlock();
+    
     dataformat.Rho     = *rho;
     dataformat.PVz     = primaryVertices->ptrAt(0)->z();
     dataformat.NVtx    = primaryVertices->size();

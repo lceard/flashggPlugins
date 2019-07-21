@@ -8,6 +8,9 @@ class flashggAnalysisTreeFormatStd
 {
     public:
 
+        unsigned run                                 ;
+	unsigned long long event                     ;
+	unsigned lumisection                         ;
         float NPu                                    ;
         int NVtx                                     ;
         bool passTrigger                             ;
@@ -215,6 +218,9 @@ class flashggAnalysisTreeFormatStd
 
         void Initialzation() {
 
+	    run                                     = 0;
+	    event                                   = 0;
+	    lumisection                             = 0;
             NPu                                     = -999.;
             NVtx                                    = -999;
             passTrigger                             = false;
@@ -424,6 +430,10 @@ class flashggAnalysisTreeFormatStd
         void RegisterTree (TTree* tree) {
 
             tree_ = tree;
+
+            tree_->Branch( "EvtInfo.run"                                  , &run                                       , "EvtInfo.run/i"             );
+            tree_->Branch( "EvtInfo.event"                                , &event                                     , "EvtInfo.event/l"           );
+            tree_->Branch( "EvtInfo.lumisection"                          , &lumisection                               , "EvtInfo.lumisection/i"     );
 
             tree_->Branch( "EvtInfo.NPu"                                     , &NPu                                     , "EvtInfo.NPu/F"            );
             tree_->Branch( "EvtInfo.NVtx"                                    , &NVtx                                    , "EvtInfo.NVtx/I"           );
