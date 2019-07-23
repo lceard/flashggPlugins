@@ -1,5 +1,4 @@
 #include "DataFormats/Common/interface/Ptr.h"
-
 #include "HLTrigger/HLTcore/interface/HLTConfigProvider.h"
 #include "DataFormats/Math/interface/deltaR.h"
 #include "DataFormats/MuonReco/interface/MuonSelectors.h"
@@ -215,14 +214,28 @@ flashggAnaTreeMakerWithSyst::Analyze( const edm::Event &iEvent, const edm::Event
         // ---------------------------------------------------------------------------------------------------------
         const Ptr<flashgg::DiPhotonCandidate> diphoPtr    = diphotonPtrs[0];
         const Ptr<flashgg::DiPhotonMVAResult> diphoMVAPtr = diphotonMVAPtrs[0];
-        dataformat.dipho_mass                 = diphoPtr->mass();
-        dataformat.dipho_pt                   = diphoPtr->pt();
-        dataformat.dipho_leadPt               = diphoPtr->leadingPhoton()->pt();
-        dataformat.dipho_leadEta              = diphoPtr->leadingPhoton()->eta();
-        dataformat.dipho_leadPhi              = diphoPtr->leadingPhoton()->phi();
-        dataformat.dipho_leadE                = diphoPtr->leadingPhoton()->energy();
-        dataformat.dipho_leadEtaSC            = diphoPtr->leadingPhoton()->superCluster()->eta();
-        dataformat.dipho_leadPhiSC            = diphoPtr->leadingPhoton()->superCluster()->phi();
+        dataformat.dipho_mass                      = diphoPtr->mass();
+        dataformat.dipho_pt                        = diphoPtr->pt();
+        dataformat.dipho_leadPt                    = diphoPtr->leadingPhoton()->pt();
+        dataformat.dipho_leadEta                   = diphoPtr->leadingPhoton()->eta();
+        dataformat.dipho_leadPhi                   = diphoPtr->leadingPhoton()->phi();
+        dataformat.dipho_leadE                     = diphoPtr->leadingPhoton()->energy();
+        dataformat.dipho_leadEtaSC                 = diphoPtr->leadingPhoton()->superCluster()->eta();
+        dataformat.dipho_leadPhiSC                 = diphoPtr->leadingPhoton()->superCluster()->phi();
+        dataformat.dipho_leadpfPhoIso04            = diphoPtr->leadingPhoton()->pfPhoIso04();
+        dataformat.dipho_leadpfPhoIso03            = diphoPtr->leadingPhoton()->pfPhoIso03();
+        dataformat.dipho_leadpfPhoIso03Corr        = diphoPtr->leadingPhoton()->pfPhoIso03Corr();
+        dataformat.dipho_leadpfNeutIso04           = diphoPtr->leadingPhoton()->pfNeutIso04();
+        dataformat.dipho_leadpfNeutIso03           = diphoPtr->leadingPhoton()->pfNeutIso03();
+        dataformat.dipho_leadpfChgIso04WrtVtx0     = diphoPtr->leadingPhoton()->pfChgIso04WrtVtx0();// WARNING: no guarantee that vertex 0 is the correct one
+        dataformat.dipho_leadpfChgIso03WrtVtx0     = diphoPtr->leadingPhoton()->pfChgIso03WrtVtx0();// WARNING: no guarantee that vertex 0 is the correct one
+        dataformat.dipho_leadpfChgIso02WrtVtx0     = diphoPtr->leadingPhoton()->pfChgIso02WrtVtx0();// WARNING: no guarantee that vertex 0 is the correct one (https://github.com/cms-analysis/flashgg/blob/dev_legacy_runII/DataFormats/interface/Photon.h) 
+        dataformat.dipho_leadpfChgIsoWrtWorstVtx04 = diphoPtr->leadingPhoton()->pfChgIsoWrtWorstVtx04();
+        dataformat.dipho_leadpfChgIsoWrtWorstVtx03 = diphoPtr->leadingPhoton()->pfChgIsoWrtWorstVtx03();
+        dataformat.dipho_leadpfChgIsoWrtChosenVtx03= diphoPtr->leadingPhoton()->pfChgIsoWrtChosenVtx03();
+        dataformat.dipho_leadpfChgIsoWrtChosenVtx03= diphoPtr->leadingPhoton()->pfChgIsoWrtChosenVtx03();
+        dataformat.dipho_leadpfChgIsoWrtChosenVtx02= diphoPtr->leadingPhoton()->pfChgIsoWrtChosenVtx02();
+        
         dataformat.dipho_leadsigEOverE        = diphoPtr->leadingPhoton()->sigEOverE();
         dataformat.dipho_leadR9               = diphoPtr->leadingPhoton()->full5x5_r9();
         dataformat.dipho_leadsieie            = diphoPtr->leadingPhoton()->full5x5_sigmaIetaIeta();
@@ -239,6 +252,19 @@ flashggAnaTreeMakerWithSyst::Analyze( const edm::Event &iEvent, const edm::Event
         dataformat.dipho_subleadE             = diphoPtr->subLeadingPhoton()->energy();
         dataformat.dipho_subleadEtaSC         = diphoPtr->subLeadingPhoton()->superCluster()->eta();
         dataformat.dipho_subleadPhiSC         = diphoPtr->subLeadingPhoton()->superCluster()->phi();
+        dataformat.dipho_subleadpfPhoIso04    = diphoPtr->subLeadingPhoton()->pfPhoIso04();
+        dataformat.dipho_subleadpfPhoIso03    = diphoPtr->subLeadingPhoton()->pfPhoIso03();        
+        dataformat.dipho_subleadpfPhoIso03Corr     = diphoPtr->subLeadingPhoton()->pfPhoIso03Corr();
+        dataformat.dipho_subleadpfNeutIso04           = diphoPtr->subLeadingPhoton()->pfNeutIso04();
+        dataformat.dipho_subleadpfNeutIso03           = diphoPtr->subLeadingPhoton()->pfNeutIso03();
+        dataformat.dipho_subleadpfChgIso04WrtVtx0     = diphoPtr->subLeadingPhoton()->pfChgIso04WrtVtx0();// WARNING: no guarantee that vertex 0
+        dataformat.dipho_subleadpfChgIso03WrtVtx0     = diphoPtr->subLeadingPhoton()->pfChgIso03WrtVtx0();// WARNING: no guarantee that vertex 0
+        dataformat.dipho_subleadpfChgIso02WrtVtx0     = diphoPtr->subLeadingPhoton()->pfChgIso02WrtVtx0();// WARNING: no guarantee that vertex 0 is the correct one (https://github.com/cms-analysis/flashgg/blob/dev_legacy_runII/DataFormats/interface/Photon.h) 
+        dataformat.dipho_subleadpfChgIsoWrtWorstVtx04 = diphoPtr->subLeadingPhoton()->pfChgIsoWrtWorstVtx04();
+        dataformat.dipho_subleadpfChgIsoWrtWorstVtx03 = diphoPtr->subLeadingPhoton()->pfChgIsoWrtWorstVtx03();
+        dataformat.dipho_subleadpfChgIsoWrtChosenVtx02= diphoPtr->subLeadingPhoton()->pfChgIsoWrtChosenVtx02();
+        dataformat.dipho_subleadpfChgIsoWrtChosenVtx03= diphoPtr->subLeadingPhoton()->pfChgIsoWrtChosenVtx03();
+    	                      
         dataformat.dipho_subleadsigEOverE     = diphoPtr->subLeadingPhoton()->sigEOverE();
         dataformat.dipho_subleadR9            = diphoPtr->subLeadingPhoton()->full5x5_r9();
         dataformat.dipho_subleadsieie         = diphoPtr->subLeadingPhoton()->full5x5_sigmaIetaIeta();
@@ -252,6 +278,12 @@ flashggAnaTreeMakerWithSyst::Analyze( const edm::Event &iEvent, const edm::Event
         dataformat.dipho_diphotonMVA          = diphoMVAPtr->result;
         dataformat.dipho_SelectedVz           = diphoPtr->vtx()->position().z();
         dataformat.dipho_GenVz                = diphoPtr->genPV().z();
+        dataformat.dipho_mva0                      = diphoPtr->mva0();
+        dataformat.dipho_mva1                      = diphoPtr->mva1();
+        dataformat.dipho_mva2                      = diphoPtr->mva2();
+        dataformat.dipho_dZ1                       = diphoPtr->dZ1();
+        dataformat.dipho_dZ2                       = diphoPtr->dZ2();
+        dataformat.dipho_vtxProbMVA                = diphoPtr->vtxProbMVA();
 
         dataformat.dipho_centralWeight        = diphoPtr->centralWeight();
         if ( storeSyst_ && !isDiphoSystTree ) {
@@ -281,6 +313,7 @@ flashggAnaTreeMakerWithSyst::Analyze( const edm::Event &iEvent, const edm::Event
             dataformat.elecs_Eta                       .emplace_back( it_elec->eta() );
             dataformat.elecs_Phi                       .emplace_back( it_elec->phi() );
             dataformat.elecs_Energy                    .emplace_back( it_elec->energy() );
+            dataformat.elecs_PfIso                     .emplace_back( it_elec->standardHggIso() );
             dataformat.elecs_EtaSC                     .emplace_back( it_elec->superCluster()->eta() );
             dataformat.elecs_PhiSC                     .emplace_back( it_elec->superCluster()->phi() );
             dataformat.elecs_EGMCutBasedIDVeto         .emplace_back( it_elec->passVetoId() );
@@ -289,7 +322,7 @@ flashggAnaTreeMakerWithSyst::Analyze( const edm::Event &iEvent, const edm::Event
             dataformat.elecs_EGMCutBasedIDTight        .emplace_back( it_elec->passTightId() );
             dataformat.elecs_passConvVeto              .emplace_back( it_elec->passConversionVeto() );
             dataformat.elecs_fggPhoVeto                .emplace_back( phoVeto( it_elec, diphoPtr, 0., 0.4, 0. ) );
-            //dataformat.elecs_EnergyCorrFactor          .emplace_back( it_elec->userFloat("ecalTrkEnergyPostCorr") / it_elec->energy() );
+           //dataformat.elecs_EnergyCorrFactor          .emplace_back( it_elec->userFloat("ecalTrkEnergyPostCorr") / it_elec->energy() );
             //dataformat.elecs_EnergyPostCorrErr         .emplace_back( it_elec->userFloat("ecalTrkEnergyErrPostCorr") );
             if ( storeSyst_ && !isDiphoSystTree ) {
                 dataformat.elecs_EnergyPostCorrScaleUp     .emplace_back( it_elec->userFloat("energyScaleUp") );
@@ -479,8 +512,8 @@ flashggAnaTreeMakerWithSyst::Analyze( const edm::Event &iEvent, const edm::Event
             dataformat.met_CorrPhiShiftPhoEnDown        = theMet->shiftedPhi ( pat::MET::PhotonEnDown      );
         }
     }
-    //Only store the first diphoton candidate which passes diphoton preselection
-    //If events with on diphoton candidate passing the diphoton preselection, the mass will be set -999.
+    //Only store the first (so the greater because vector is sorted descending) diphoton candidate from the vector of diphoton which pass diphoton preselection
+    //If events with NO diphoton candidate passing the diphoton preselection, the mass (and all other diphoton variables) will be set to the initialization value -999.
     dataformat.TreeFill();
 
 }
